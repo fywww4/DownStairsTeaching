@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
                 currentFloor = other.gameObject;
                 ModifyHp(1);
                 other.gameObject.GetComponent<AudioSource>().Play();
-            }
+            }   
         }
         if (other.gameObject.tag == "Nails")
         {
@@ -76,6 +76,28 @@ public class Player : MonoBehaviour
             ModifyHp(-3);
             GetComponent<Animator>().SetTrigger("hurt");
             other.gameObject.GetComponent <AudioSource>().Play();
+        }
+        if (other.gameObject.tag == "Bounce")
+        {
+            if (other.contacts[0].normal == new Vector2(0, 1.0f))
+            {
+                Debug.Log("Touch Bounce");
+                currentFloor = other.gameObject;
+
+                // 彈跳效果
+                Rigidbody2D rb = GetComponent<Rigidbody2D>();
+                rb.velocity = new Vector2(rb.velocity.x, 10.0f); // 向上彈
+
+                ModifyHp(1);
+            }
+        }
+
+        if (other.gameObject.tag == "Void")
+        {
+            Debug.Log("Touch Void");
+
+            // 可選：讓玩家直接掉下去
+            currentFloor = null;
         }
     }
 

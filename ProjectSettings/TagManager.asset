@@ -8,6 +8,9 @@ TagManager:
   - Normal
   - Nails
   - Ceiling
+  - Bounce
+  - Moving
+  - Void
   layers:
   - Default
   - TransparentFX
