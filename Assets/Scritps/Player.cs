@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5.0f;
 
+    GameObject currentFloor;
+
     // Update is called once per frame
     void Update()
     {
@@ -15,17 +17,26 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.tag == "Floor1")
+        if(other.gameObject.tag == "Normal")
         {
-            Debug.Log("撞到第一種階梯");
+            if (other.contacts[0].normal == new Vector2(0, 1.0f))
+            {
+                Debug.Log("撞到第一種階梯");
+                currentFloor = other.gameObject;
+            }
         }   
-        if (other.gameObject.tag == "Floor2")
+        if (other.gameObject.tag == "Nails")
         {
-            Debug.Log("撞到第二種階梯");
+            if (other.contacts[0].normal == new Vector2(0, 1.0f))
+            {
+                Debug.Log("撞到第二種階梯");
+                currentFloor = other.gameObject;
+            }
         }
-        if (other.gameObject.tag == "DeathLine")
+        if (other.gameObject.tag == "Ceiling")
         {
-            Debug.Log("你輸了");
+            Debug.Log("碰到天花板了");
+            currentFloor.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 }
