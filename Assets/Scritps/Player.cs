@@ -25,14 +25,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
             GetComponent<SpriteRenderer>().flipX = false;
             GetComponent<Animator>().SetBool("Run", true);
         }
 
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
             GetComponent<SpriteRenderer>().flipX = true;
